@@ -1,9 +1,12 @@
 from flask import Flask, render_template,request, jsonify
+import markdown
 import requests
 
 app = Flask(__name__)
-def chatbot(promt):
-    url = f'https://open-source-backend.vercel.app/podcast-ai?prompt={promt}'
+def chatbot(promt, riwayat_chat = ''):
+    promt = promt.replace(' ', '%20')
+    # url = f'https://open-source-backend.vercel.app/podcast-ai?prompt={promt}'
+    url = f'https://didactic-train-gpwqv66gvwxfwp5j-5000.app.github.dev/podcast-ai?prompt={promt}dimana%20riwayat%20chat%20:{riwayat_chat}Jangan%20berikan%20informasi%20riwayat%20chat%20jika%20chatnya%20kosong%20 '
     response = requests.get(url)
     response = response.json()
     return response
@@ -18,7 +21,8 @@ def pinter_omong():
 @app.route('/pinter-omong/chat')
 def chat():
     promt = request.args.get('prompt')
-    response = chatbot(promt)
+    riwayat_chat = request.args.get('riwayat')
+    response = chatbot(promt, riwayat_chat)
     response = response['payload']
     
     return jsonify(response)
