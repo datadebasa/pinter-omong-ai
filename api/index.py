@@ -3,9 +3,10 @@ import requests
 
 app = Flask(__name__)
 def chatbot(promt, riwayat_chat = ''):
-    promt = promt.replace(' ', '%20')
-    # url = f'https://open-source-backend.vercel.app/podcast-ai?prompt={promt}'
-    url = f'https://open-source-backend.vercel.app//podcast-ai?prompt={promt}dimana%20riwayat%20chat%20:{riwayat_chat}Jangan%20berikan%20informasi%20riwayat%20chat%20jika%20chatnya%20kosong%20 '
+    # promt = promt.replace(' ', '%20')
+    
+    # url = f'https://didactic-train-gpwqv66gvwxfwp5j-5000.app.github.dev/podcast-ai?prompt={promt}&riwayat={riwayat_chat}'
+    url = f'https://open-source-backend.vercel.app/podcast-ai?prompt={promt}&riwayat={riwayat_chat}'
     response = requests.get(url)
     response = response.json()
     return response
